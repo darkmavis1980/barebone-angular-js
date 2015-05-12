@@ -17,9 +17,6 @@ module.exports = function(grunt) {
     // Full deployment ready app built to this directory
     dist: 'dist',
 
-    // Styleguide directory path
-    styleguide: 'styleguide',
-
     //if set to true Grunt will open a new page in the browser
     autoOpen: true,
     // Change this to '0.0.0.0' to access the server from outside.
@@ -43,82 +40,6 @@ module.exports = function(grunt) {
             'apiUrl' : 'http://localhost:8000',
             'environment' : 'development'
           }
-        }
-      },
-      alessio: {
-        constants: {
-          'API_DEFAULTS' : {
-            'apiUrl' : 'http://192.168.18.143:8000',
-            'environment' : 'development'
-          }
-        }
-      },
-      alessiohome: {
-        constants: {
-          'API_DEFAULTS' : {
-            'apiUrl' : 'http://192.168.1.17:8000',
-            'environment' : 'development'
-          }
-        }
-      },
-      alan: {
-        constants: {
-          'API_DEFAULTS' : {
-            'apiUrl' : 'http://192.168.18.126:8000',
-            'environment' : 'development'
-          }
-        }
-      },
-      laura: {
-        constants: {
-          'API_DEFAULTS' : {
-            'apiUrl' : 'http://192.168.17.254:8000',
-            'environment' : 'development'
-          }
-        }
-      },
-      max: {
-        constants: {
-          'API_DEFAULTS' : {
-            'apiUrl' : 'http://192.168.18.146:8000',
-            'environment' : 'development'
-          }
-        }
-      },
-      pre: {
-        constants: {
-          'API_DEFAULTS' : {
-            'apiUrl' : 'http://caresng-dev.cremelabs.com/api',
-            'environment' : 'preproduction'
-          }
-        }
-      },
-      dist: {
-        constants: {
-          'API_DEFAULTS' : {
-            'apiUrl' : 'http://caresng.cremelabs.com/api',
-            'environment' : 'internal'
-          }
-        }
-      },
-      prod: {
-        constants: {
-          'API_DEFAULTS' : {
-            'apiUrl' : 'http://caresng.cremeglobal.com/api',
-            'environment' : 'production'
-          }
-        }
-      }
-    },
-
-    'merge-json': {
-      'i18n': {
-        files: {
-          '<%= appConfig.tmp %>/translations/en.json': [
-            '<%= appConfig.app %>/common/**/translations/**/{,*/}*.json',
-            '<%= appConfig.app %>/**/translations/**/{,*/}*.json',
-            '<%= appConfig.app %>/**/**/translations/**/{,*/}*.json'
-          ]
         }
       }
     },
@@ -145,15 +66,6 @@ module.exports = function(grunt) {
         tasks: ['sass']
       },
 
-      'merge-json': {
-        files: [
-          '<%= appConfig.app %>/common/**/translations/**/{,*/}*.json',
-          '<%= appConfig.app %>/**/translations/**/{,*/}*.json',
-          '<%= appConfig.app %>/**/**/translations/**/{,*/}*.json'
-        ],
-        tasks: ['merge-json']
-      },
-
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -176,7 +88,7 @@ module.exports = function(grunt) {
         src: [
           '<%= appConfig.app %>/*.js',
           '<%= appConfig.app %>/**/*.js',
-          '!<%= appConfig.app %>/bower_components/**/*.js',
+          '!<%= appConfig.app %>/libraries/**/*.js',
           '!<%= appConfig.app %>/**/*.spec.js'
         ]
       },
@@ -200,7 +112,7 @@ module.exports = function(grunt) {
           src: [
             'Gruntfile.js',
             '<%= appConfig.app %>/**/*.js',
-            '!<%= appConfig.app %>/bower_components/**/*.js',
+            '!<%= appConfig.app %>/libraries/**/*.js',
             '!<%= appConfig.app %>/**/tests/*.js'
           ]
         }]
@@ -240,7 +152,7 @@ module.exports = function(grunt) {
           '<%= appConfig.app %>/styles/login.scss'
         ],
         options: {
-          exclude: ['app/bower_components/bootstrap/']
+          exclude: ['app/libraries/bootstrap/']
         }
       },
 
@@ -306,7 +218,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= appConfig.app %>',
-          src: ['img/{,*/}*.{png,jpg,jpeg,gif,svg}','bower_components/creme-global-styles/img/*.*'],
+          src: ['img/{,*/}*.{png,jpg,jpeg,gif,svg}'],
           dest: '<%= appConfig.dist %>/img',
           flatten: true
         }]
@@ -429,12 +341,12 @@ module.exports = function(grunt) {
       dev: {
         files: [{
           expand: true,
-          cwd: '<%= appConfig.app %>/bower_components/bootstrap-sass-official/assets/fonts',
+          cwd: '<%= appConfig.app %>/libraries/bootstrap-sass-official/assets/fonts',
           src: '{,*/}*',
           dest: '<%= appConfig.tmp %>/fonts'
         },{
           expand: true,
-          cwd: '<%= appConfig.app %>/bower_components',
+          cwd: '<%= appConfig.app %>/libraries',
           src: 'creme-global-styles/img/*.*',
           dest: '<%= appConfig.tmp %>/img',
           flatten: true
@@ -453,7 +365,7 @@ module.exports = function(grunt) {
           src: [
             '*.html',
             '*/**/*.html',
-            '!bower_components/**/*.html',
+            '!libraries/**/*.html',
             'translations/{,*/}*.json',
             'common/ga.js',
             'fonts/*',
@@ -472,7 +384,7 @@ module.exports = function(grunt) {
         }, {
           expand: true,
           cwd: '<%= appConfig.app %>',
-          src: 'bower_components/**/{*.ttf,*.woff,*.woff2}',
+          src: 'libraries/**/{*.ttf,*.woff,*.woff2}',
           dest: '<%= appConfig.dist %>/fonts',
           flatten: true
         }]
@@ -497,36 +409,12 @@ module.exports = function(grunt) {
       }
     },
 
-    protractor: {
-      options: {
-        configFile: "protractor.conf.js", // Default config file
-        keepAlive: true,
-        noColor: false,
-      },
-      all: {}
-    },
-
     shell: {
       updateWebdriver: {
         command: 'npm run update-webdriver'
       },
       jsdoc: {
         command: 'jsdoc -c jsdoc.conf.json'
-      },
-      styleguide: {
-        command: 'styleguide \
-        --kss-source "<%= appConfig.app %>/styles/*.scss" \
-        --kss-source "<%= appConfig.app %>/auth/styles/*.scss" \
-        --kss-source "<%= appConfig.app %>/common/styles/*.scss" \
-        --kss-source "<%= appConfig.app %>/common/errors/styles/*.scss" \
-        --kss-source "<%= appConfig.app %>/common/notifications/styles/*.scss" \
-        --kss-source "<%= appConfig.app %>/filesystem/styles/*.scss" \
-        --kss-source "<%= appConfig.app %>/job/styles/*.scss" \
-        --kss-source "<%= appConfig.app %>/wizard/styles/*.scss" \
-        --kss-source "<%= appConfig.app %>/dataviewer/styles/*.scss" \
-        --style-source "<%= appConfig.tmp %>/*.css" \
-        --output <%= appConfig.styleguide %> \
-        --watch --server'
       }
     },
 
@@ -542,11 +430,6 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('e2etest', [
-    'shell:updateWebdriver',
-    'protractor'
-  ]);
-
   grunt.registerTask('test', 'Run tests', function(){
     var type = grunt.option('type') || 'concurrent';
     var e2e = grunt.option('e2e');
@@ -555,13 +438,6 @@ module.exports = function(grunt) {
       'npm-install',
       'copy:config'
     ]);
-
-    if(e2e){
-      grunt.task.run([
-        'shell:updateWebdriver',
-        'protractor'
-      ]);
-    }
 
     grunt.task.run([
       'wiredep:test',
@@ -592,8 +468,7 @@ module.exports = function(grunt) {
         'copy:config',
         'copy:dev',
         'ngconstant:' + env,
-        'connect:livereload',
-        'merge-json'
+        'connect:livereload'
       ]);
 
       if (test) {
@@ -625,7 +500,6 @@ module.exports = function(grunt) {
       'clean:dist',
       'wiredep:app',
       'sass',
-      'merge-json',
       'ngconstant:' + env,
       'useminPrepare',
       'imagemin',
