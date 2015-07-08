@@ -20,7 +20,9 @@ module.exports = function(grunt) {
     //if set to true Grunt will open a new page in the browser
     autoOpen: true,
     // Change this to '0.0.0.0' to access the server from outside.
-    hostName: 'localhost'
+    hostName: 'localhost',
+    // Project prefix
+    projectPrefix: 'MyProject'
   };
 
   grunt.initConfig({
@@ -32,13 +34,21 @@ module.exports = function(grunt) {
     ngconstant: {
       options: {
         dest: '<%= appConfig.app %>/config.js',
-        name: 'PXClient.configuration'
+        name: '<%= appConfig.projectPrefix %>.configuration'
       },
       dev: {
         constants: {
           'API_DEFAULTS' : {
             'apiUrl' : 'http://localhost:8000',
             'environment' : 'development'
+          }
+        }
+      },
+      dist: {
+        constants: {
+          'API_DEFAULTS' : {
+            'apiUrl' : 'http://localhost:8000',
+            'environment' : 'production'
           }
         }
       }
@@ -88,7 +98,7 @@ module.exports = function(grunt) {
         src: [
           '<%= appConfig.app %>/*.js',
           '<%= appConfig.app %>/**/*.js',
-          '!<%= appConfig.app %>/libraries/**/*.js',
+          '!<%= appConfig.app %>/bower_components/**/*.js',
           '!<%= appConfig.app %>/**/*.spec.js'
         ]
       },
@@ -112,7 +122,7 @@ module.exports = function(grunt) {
           src: [
             'Gruntfile.js',
             '<%= appConfig.app %>/**/*.js',
-            '!<%= appConfig.app %>/libraries/**/*.js',
+            '!<%= appConfig.app %>/bower_components/**/*.js',
             '!<%= appConfig.app %>/**/tests/*.js'
           ]
         }]
@@ -152,7 +162,7 @@ module.exports = function(grunt) {
           '<%= appConfig.app %>/styles/login.scss'
         ],
         options: {
-          exclude: ['app/libraries/bootstrap/']
+          exclude: ['app/bower_components/bootstrap/']
         }
       },
 
@@ -341,7 +351,7 @@ module.exports = function(grunt) {
       dev: {
         files: [{
           expand: true,
-          cwd: '<%= appConfig.app %>/libraries/bootstrap-sass-official/assets/fonts',
+          cwd: '<%= appConfig.app %>/bower_components/bootstrap-sass-official/assets/fonts',
           src: '{,*/}*',
           dest: '<%= appConfig.tmp %>/fonts'
         },{
@@ -365,7 +375,7 @@ module.exports = function(grunt) {
           src: [
             '*.html',
             '*/**/*.html',
-            '!libraries/**/*.html',
+            '!bower_components/**/*.html',
             'translations/{,*/}*.json',
             'common/ga.js',
             'fonts/*',
