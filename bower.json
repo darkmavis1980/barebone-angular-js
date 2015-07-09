@@ -1,7 +1,7 @@
 {
   "name": "angular-seed",
   "description": "A starter project for AngularJS",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/angular/angular-seed",
   "license": "MIT",
   "private": true,
