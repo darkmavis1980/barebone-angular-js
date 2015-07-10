@@ -88,6 +88,14 @@ module.exports = function(grunt) {
       }
     },
 
+    changelog: {
+      options: {
+        preset: 'angular',
+        file: 'CHANGELOG.md',
+        allBlocks: true
+      }
+    },
+
     // Check code styles
     jshint: {
       options: {
