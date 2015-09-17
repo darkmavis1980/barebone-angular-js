@@ -1,7 +1,7 @@
 {
   "name": "angular-seed",
   "description": "A starter project for AngularJS",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/angular/angular-seed",
   "license": "MIT",
   "private": true,
@@ -20,8 +20,8 @@
     "lodash": "~3.x.x",
     "moment": "~2.x.x",
     "angular-animate": "~1.x.x",
-    "angular-off-click": "~0.0.7",
+    "angular-off-click": "~0.0.8",
     "angular-ripple": "*",
-    "angular-momentjs": "~0.1.9"
+    "angular-momentjs": "~0.2.x"
   }
 }

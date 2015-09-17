@@ -1,12 +1,12 @@
 {
   "name": "barebone-project-angularjs",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A barebone project for AngularJS",
   "license": "MIT",
   "devDependencies": {
     "am-angular-jsdoc": "git://github.com/darkmavis1980/am-angular-jsdoc.git",
-    "bower": "^1.3.1",
+    "bower": "^1.5.2",
     "dgeni": "^0.4.1",
     "dgeni-packages": "^0.10.8",
     "grunt": "~0.4.5",
@@ -40,9 +40,9 @@
     "grunt-shell": "^1.1.1",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "~1.9.0",
-    "http-server": "^0.6.1",
+    "http-server": "^0.8.x",
     "jsdoc": "~3.2.2",
-    "jshint-stylish": "^1.0.0",
+    "jshint-stylish": "^2.0.x",
     "karma": "~0.12.24",
     "karma-chrome-launcher": "^0.1.7",
     "karma-cli": "0.0.4",
@@ -55,11 +55,11 @@
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-phantomjs-launcher": "^0.2.x",
     "karma-phantomjs2-launcher": "^0.1.6",
-    "load-grunt-tasks": "~0.6.0",
+    "load-grunt-tasks": "~3.1.0",
     "protractor": "^1.1.1",
     "sc5-styleguide": "^0.3.6",
     "shelljs": "^0.2.6",
-    "time-grunt": "^1.0.0"
+    "time-grunt": "^1.2.x"
   },
   "scripts": {
     "postinstall": "bower install; bower update",
