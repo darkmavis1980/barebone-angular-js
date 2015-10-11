@@ -364,6 +364,11 @@ module.exports = function(grunt) {
           dest: '<%= appConfig.tmp %>/fonts'
         },{
           expand: true,
+          cwd: '<%= appConfig.app %>/bower_components/fontawesome/fonts',
+          src: '{,*/}*',
+          dest: '<%= appConfig.tmp %>/fonts'
+        },{
+          expand: true,
           cwd: '<%= appConfig.app %>/libraries',
           src: 'creme-global-styles/img/*.*',
           dest: '<%= appConfig.tmp %>/img',
